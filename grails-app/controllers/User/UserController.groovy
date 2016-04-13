@@ -9,7 +9,7 @@ class UserController {
         if (currentUser){
             session.user = currentUser
             flash.message = "Hello, $currentUser.name"
-            redirect(controller: "content", action: "index")
+            redirect(controller: "content")
         }
         else {
             flash.message = "Login or password are incorrect. Try again"

@@ -1,6 +1,11 @@
 package content
 
+import Project.Project
+import Task.Task
+
 class ContentController {
+
+    static defaultAction = "projectList"
 
     def beforeInterceptor = [action: this.&auth]
 
@@ -11,7 +16,7 @@ class ContentController {
         }
     }
 
-    def index() {
-        render "all is fine"
+    def projectList() {
+        [projects: Project.findAll()]
     }
 }
