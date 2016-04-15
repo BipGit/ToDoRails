@@ -8,6 +8,10 @@ class Project {
     Integer priority
     User user
 
+    static mapping = {
+        tasks sort: 'priority', order: 'asc'
+    }
+
     static hasMany = [tasks: Task]
     static hasOne = [user: User]
 
@@ -20,7 +24,7 @@ class Project {
     String toString() {
         String projectStringInstance = "Project#$id("+ "$projectName tasks: ["
         tasks.each {
-            projectStringInstance += "taskID#$it.id " +it.subject+";"
+            projectStringInstance += "taskID#$it.id " +it.subject+"priority:" + it.priority +";"
         }
         projectStringInstance += "]"
 
