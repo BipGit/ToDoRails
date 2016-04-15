@@ -17,7 +17,7 @@ class ContentController {
     }
 
     def projectList() {
-        [projects: Project.list()]
+        [projects: Project.findAll()]
     }
 
     def increaseTaskPriority() {
@@ -26,6 +26,11 @@ class ContentController {
 
         def currentProject = Project.findById(projectID)
         def currentTask = Task.findByIdAndProject(taskID, currentProject)
+        println "increasing"
+        println currentProject
+        println currentTask
+
+        currentProject.projectName = "NewProjectName"
 
         if (currentTask) {
             def taskForChange = Task.findByPriorityAndProject(currentTask.priority - 1, currentProject)
@@ -35,6 +40,8 @@ class ContentController {
                 taskForChange.priority = taskForChange.priority + 1
                 taskForChange.save(flush: true)
                 currentProject.save(flush: true)
+                println Project.findById(currentProject.id)
+                println Project.findAll()
             }
         } else
             response.sendError(404, "")
@@ -48,7 +55,13 @@ class ContentController {
         String taskID = params.taskID
 
         def currentProject = Project.findById(projectID)
-        def currentTask = currentProject.tasks.find() {it.id == taskID}
+        def currentTask = Task.findByIdAndProject(taskID, currentProject)
+
+        println "decreasing"
+        println currentProject
+        println currentTask
+
+        currentProject.projectName = "NewProjectName"
 
         if (currentTask) {
             def taskForChange = Task.findByPriorityAndProject(currentTask.priority + 1, currentProject)
@@ -58,6 +71,8 @@ class ContentController {
                 taskForChange.priority = taskForChange.priority - 1
                 taskForChange.save(flush: true)
                 currentProject.save(flush: true)
+                println Project.findById(currentProject.id)
+                println Project.findAll()
             }
             redirect(action: "projectList")
         } else

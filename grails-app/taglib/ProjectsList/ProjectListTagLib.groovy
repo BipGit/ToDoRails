@@ -43,7 +43,7 @@ class ProjectListTagLib {
                 sb << "<a href=\""+g.createLink(controller: "content", action:"increaseTaskPriority", params:[taskID: it.id, projectID:it.project.id])+"\">"
                 sb << "<img class=\"taskLevelUp\" src=\"${imageArrowUp}\">"
                 sb << "</a>"
-                sb << "<a href=\""+g.createLink(controller: "content", action:"decreaseTaskPriority", id:it.id)+"\">"
+                sb << "<a href=\""+g.createLink(controller: "content", action:"decreaseTaskPriority", params:[taskID: it.id, projectID:it.project.id])+"\">"
                 sb << "<img class=\"taskLevelDown\" src=\"${imageArrowDown}\">"
                 sb << "</a>"
                 sb << "</td>"
